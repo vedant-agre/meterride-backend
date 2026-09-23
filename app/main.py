@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
+from app.routers import auth_router, drivers_router, users_router, vehicles_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -36,3 +37,9 @@ def health_check() -> dict[str, str]:
         "status": "ok",
         "service": "meterride-backend",
     }
+
+
+app.include_router(auth_router)
+app.include_router(users_router)
+app.include_router(drivers_router)
+app.include_router(vehicles_router)
